@@ -1,0 +1,52 @@
+<div class="bg-warning-subtle d-flex justify-content-center" style="height: 78vh;">
+
+  <div *ngIf="showModal == true" class="d-flex align-items-center text-danger font_regular modal-settings p-2" style=" font-size: 1.1rem; border: 2px solid red;">
+    <div>
+      <div class="d-flex align-items-center text-center">
+        <p>{{winner}}</p>
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <button class="btn btn-outline-danger rounded-4" (click)="back()">Go To Main Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showError == true" class="d-flex align-items-center text-danger font_regular modal-settings p-2" style=" font-size: 1.1rem; border: 2px solid red;">
+    <div>
+      <div class="d-flex align-items-center text-center">
+        <p>{{errorMessage}}</p>
+      </div>
+    </div>
+  </div>
+
+    <div class="container-fluid d-flex flex-column align-items-center h-100" [ngClass]="{ 'unclickable-element': showModal || showError }">
+        <div class="d-flex justify-content-center  align-items-center h-75">
+            <div class="card bg-warning-subtle w-25">
+                <img src="./../../assets/Red_Soccer_Ball_inside_Red_Flag_icon.png" class="card-img-top" alt="...">
+                <div class="card-body text-danger font_regular" style="font-size: 1.3rem;">
+                  <h5 class="card-title" style="font-size: 1.2rem;">{{participant1}}</h5>
+                  <p class="card-text">Wins: <span>{{wins1}}</span></p>
+                </div>
+              </div>
+
+              <span class="text-danger font_regular" style="font-size: 2rem; margin-right: 15px; margin-left: 15px;">VS</span>
+
+              <div class="card bg-warning-subtle w-25">
+                <img src="./../../assets/Red_Soccer_Ball_inside_blue_Flag_icon.png" class="card-img-top" alt="...">
+                <div class="card-body text-primary font_regular" style="font-size: 1.3rem;">
+                  <h5 class="card-title" style="font-size: 1.2rem;">{{participant2}}</h5>
+                  <p class="card-text">Wins: <span>{{wins2}}</span></p>
+                </div>
+                
+              </div>          
+        </div>
+          <div class="text-center" style="height: 12.5%;">
+            <p class="text-danger font_regular" style="font-size: 2rem;"> Score</p>
+            <p class="text-danger font_regular" style="font-size: 2rem;"><span>{{score1}}</span> : <span>{{score2}}</span></p>
+          </div>
+        <div style="height: 12.5%;" class="d-flex align-items-end mb-1">
+            <a (click)="play()" class="btn btn-success rounded-4">Play</a>
+        </div>
+    </div>
+</div>
+

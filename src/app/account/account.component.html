@@ -1,0 +1,90 @@
+<div class="bg-warning-subtle d-flex justify-content-center" style="height: 78vh;"> 
+  <div *ngIf="showErrorModal == true" class="d-flex align-items-center text-danger font_regular modal-settings p-2" style=" font-size: 1.1rem; border: 2px solid red;">
+    <div>
+      <div class="d-flex align-items-center text-center">
+        <p>{{errorMessage}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showSuccessMessage == true" class="d-flex align-items-center text-danger font_regular modal-settings p-2" style=" font-size: 1.1rem; border: 2px solid red;">
+    <div>
+      <div class="d-flex align-items-center text-center">
+        <p>{{successMessage}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showDeleteModal == true" class="d-flex align-items-center text-danger font_regular modal-settings p-2" style=" font-size: 1.1rem; border: 2px solid red;">
+    <div>
+      <div class="d-flex align-items-center text-center">
+        <p>Deleting Gamemaster is going to result in deletion of all the data related to this Gamemaster. Are you sure you want to proceed?</p>
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <button class="btn btn-outline-danger rounded-4" style="margin-right: 5px;" (click)="stop()">No</button>
+        <button  class="btn btn-outline-danger rounded-4" (click)="continue()">Yes</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="d-flex justify-content-evenly align-items-center flex-column" [ngClass]="{ 'unclickable-element': showErrorModal }" [ngClass]="{ 'unclickable-element': showSuccessMessage }" [ngClass]="{ 'unclickable-element': showDeleteModal }">
+    <div style="height: 12.5%;" class="mt-1">
+        <p class="font_regular text-danger" style="font-size: 1.5rem;">Account Details of Gamemaster:</p>
+    </div>
+    <form  [formGroup]="accountForm" method="post" style="border: 2px solid green;" class="p-4 bg-danger-subtle h-75">
+      <div class="font_regular text-danger mb-5 h-50 d-flex flex-column align-content-center" style="font-size: 1.1rem; ">
+        
+          <div>
+              <label for="exampleFormControlInput1" class="form-label">Username</label>
+              <input type="text" formControlName="username" class="form-control border-2 border-danger bg-warning-subtle" id="exampleFormControlInput1">
+            </div>
+
+            <div  *ngIf="accountForm.get('username')?.hasError('required') && accountForm.get('username')?.touched" class="text-center ">
+              <span style="font-size: 1rem;" class="font_regular text-danger-emphasis text-wrap"> <i class="fa-solid fa-triangle-exclamation"></i> This field is required</span>
+          </div>
+          <div  *ngIf="accountForm.get('username')?.hasError('minlength') && accountForm.get('username')?.touched" class="text-center ">
+              <span style="font-size: 1rem;" class="font_regular text-danger-emphasis text-wrap"> <i class="fa-solid fa-triangle-exclamation"></i> Username must at least 3 characters long</span>
+          </div>
+          <div  *ngIf="accountForm.get('username')?.hasError('maxlength') && accountForm.get('username')?.touched" class="text-center ">
+              <span style="font-size: 1rem;" class="font_regular text-danger-emphasis text-wrap"> <i class="fa-solid fa-triangle-exclamation"></i> Usernames length cannot exceed 50 characters</span>
+          </div>
+
+          <div *ngIf="showUsernameError">
+              <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> {{usernameError}} </span>
+          </div>
+
+            <div>
+              <label for="exampleFormControlInput1" class="form-label">Email address</label>
+              <input type="email" formControlName="email" class="form-control border-2 border-danger bg-warning-subtle" id="exampleFormControlInput1">
+            </div>
+
+            <div *ngIf="showEmailError">
+              <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> {{emailError}} </span>
+          </div>
+
+          <div  *ngIf="accountForm.get('email')?.hasError('required') && accountForm.get('email')?.touched" class="text-center ">
+              <span style="font-size: 1rem;" class="font_regular text-danger-emphasis text-wrap"> <i class="fa-solid fa-triangle-exclamation"></i> This field is required</span>
+          </div>
+  
+          <div  *ngIf="accountForm.get('email')?.hasError('email') && accountForm.get('email')?.touched || accountForm.get('email')?.hasError('minlength') || accountForm.get('email')?.hasError('maxlength')" class="text-center ">
+              <span style="font-size: 1rem;" class="font_regular text-danger-emphasis text-wrap"> <i class="fa-solid fa-triangle-exclamation"></i> Please provide valid email between 10 and 50 characters</span>
+          </div>
+
+      </div>
+
+        <div class="btn-group mt-5" role="group" aria-label="Basic example">
+          
+          <a routerLink="password" class="btn btn-outline-danger rounded-4">Change Password</a>
+          <button (click)="deleteGm()" class="btn btn-outline-danger rounded-4" style="margin-left: 10px;">Delete</button>
+          <button type="submit" (click)="onSubmit()" class="btn btn-outline-danger rounded-4" style="margin-left: 10px;">Update</button>
+        </div>
+        
+    </form>
+    <div style="height: 12.5%;" class="d-flex align-items-end">
+      <div class="mb-1">
+        <a routerLink="back" class="btn btn-danger rounded-4" style="margin-right: 10px;">Back</a>
+      </div>
+    </div>
+  </div> 
+</div>

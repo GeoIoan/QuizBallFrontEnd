@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+.font_regular{
+    font-family: 'Play';
+    src: url('assets/fonts/Play-Regular.ttf');
+}
+
+.font-size {
+    font-size: 3rem;
+}
+
+.btn-font-size{
+    font-size: 1.3rem;
+}
+
+.font_bold{
+    font-family: 'Play';
+    src: url('assets/fonts/Play-Bold.ttf');
+}
+
+.font-mario{
+    font-family: 'Mario';
+    src: url('assets/fonts/SuperMario286-18qg.ttf')
+}
+
+.shadow-text {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.modal-settings{
+    position: absolute;
+    top: 20%;
+  }
+
+
+  .unclickable-element {
+    pointer-events: none;
+    opacity: 0.1;
+  }

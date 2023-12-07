@@ -1,0 +1,10 @@
+.modal-settings{
+    position: absolute;
+    top: 20%;
+  }
+
+
+  .unclickable-element {
+    pointer-events: none;
+    opacity: 0.1;
+  }

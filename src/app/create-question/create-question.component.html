@@ -1,0 +1,77 @@
+<div class="bg-warning-subtle d-flex align-items-center justify-content-center font_regular text-danger" style="height: 78vh; font-size: 1.1rem;">
+    <form  class="d-flex flex-column gap-2 align-items-center w-100">
+        <h4 class="mt-2" style="font-size: 1.5rem;">Create your Question</h4>
+        <div class="d-flex justify-content-evenly w-75">
+            <div class="w-25">
+                <div class="form-group">
+                    <label for="category" class="form-label">Category</label>
+                    <select class="form-select mb-3 bg-warning-subtle border-2 border-danger"  formControlname="category"  name="category" aria-label="Large select example">
+                        <option selected>Choose Category</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="difficulty" class="form-label">Difficulty</label>
+                    <select class="form-select mb-3 bg-warning-subtle border-2 border-danger"  formControlname="difficulty"  name="difficulty" aria-label="Large select example">
+                        <option selected>Choose Difficulty Level</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="w-25">
+            <div class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" type="text"
+                name="description"
+                class="form-control bg-warning-subtle border-2 border-danger"
+                formControlName="description"></textarea>
+                <!-- <div class="text-danger"
+                    *ngIf="form.get('givenName')?.invalid && form.get('givenName')?.touched">Given name is required</div>  -->      
+            </div>
+    
+            <div class="form-group">
+                <label for="answer" class="form-label">Answer</label>
+                <textarea class="form-control" type="text"
+                name="answer"
+                class="form-control bg-warning-subtle border-2 border-danger"
+                formControlName="answer"></textarea>
+                <!-- <div class="text-danger"
+                    *ngIf="form.get('surname')?.invalid && form.get('surname')?.touched">Surname is required</div>  -->     
+            </div> 
+
+            <div class="form-group">
+                <label for="50/50" class="form-label">50/50</label>
+                    <textarea class="form-control" type="text"
+                    name="50/50"
+                    class="form-control bg-warning-subtle border-2 border-danger"
+                    formControlName="50/50"></textarea>
+                <!-- <div class="text-danger"
+                    *ngIf="form.get('surname')?.invalid && form.get('surname')?.touched">Surname is required</div>  -->     
+            </div>
+            
+        
+        
+            <div class="form-group">
+                <label for="photoURL" class="form-label">Photo</label>
+                <input type="url"
+                        name="photoURL"
+                        class="form-control bg-warning-subtle border-2 border-danger"
+                        formControlName="photoURL">
+                </div>
+            </div> 
+        
+        </div>
+           
+        <div class="form-group">
+                <a routerLink="see-question"
+                class="btn btn-danger rounded-4">Submit</a>
+            </div>
+            
+    </form>
+</div>
