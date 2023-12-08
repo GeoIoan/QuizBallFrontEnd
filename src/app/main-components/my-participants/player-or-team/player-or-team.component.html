@@ -1,22 +1,16 @@
-<div class="bg-warning-subtle d-flex justify-content-between align-items-center flex-column" style="height: 78vh;">
-    <div class="h-75 d-flex align-items-center mt-3">
-        <div class="d-flex flex-column align-items-center">
-            <div>
-                <h4 class="text-danger font_regular" style="font-size: 2rem;">Teams or Players</h4>
-            </div>
-
-            <div class="d-flex justify-content-center  align-items-center m-5">
-                
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <a (click)="players()" class="btn btn-danger rounded-4" style="margin-right: 15px;">Your Players</a>
-                    <a (click)="teams()" class="btn btn-danger rounded-4">Your Teams</a>
-                </div>
-                
-            </div>
+<div class="gradient-bg d-flex justify-content-between align-items-center flex-column" style="height: 78vh;">
+    <div class="mt-2">
+    <p class="text-danger font_regular" style="font-size: 2rem;">Teams or Players</p>
         </div>
-     </div>
+        <div class="d-flex flex-column align-items-center p-3 rounded-4" style="border: 2px solid green;">                          
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a (click)="players()" class="btn btn-outline-danger rounded-4" style="margin-right: 15px;">Your Players</a>
+                <a (click)="teams()" class="btn btn-outline-danger rounded-4">Your Teams</a>
+            </div>           
+        </div>
+     
 
-    <div class="btn-group mt-3" role="group" aria-label="Basic example">
+    <div class="btn-group" role="group" aria-label="Basic example">
         <a routerLink="back" class="btn btn-danger rounded-4 mb-2">Go Back</a>
     </div>   
 </div>

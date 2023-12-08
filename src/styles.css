@@ -39,3 +39,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     pointer-events: none;
     opacity: 0.1;
   }
+
+.gradient-bg{
+    background: linear-gradient(to bottom, #fff3cd, #b96687);
+}

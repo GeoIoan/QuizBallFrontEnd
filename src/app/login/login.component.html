@@ -1,4 +1,4 @@
-<div class="bg-warning-subtle d-flex justify-content-center align-items-center" style="height: 78vh;
+<div class="gradient-bg d-flex justify-content-center align-items-center" style="height: 78vh;
  display: flex; justify-content: center;">
  <div *ngIf="showErrorModal == true" class="d-flex align-items-center text-danger font_regular modal-settings p-2" style=" font-size: 1.1rem; border: 2px solid red;">
     <div>
@@ -7,11 +7,10 @@
       </div>
     </div>
   </div>
-<div class="container-fluid" [ngClass]="{ 'unclickable-element': showErrorModal } ">
-    <div class="d-flex justify-content-center align-items-center">
-        <div class="col-md-6">
-            <div class="card rounded border-2 border-danger">
-                <div class="card-body bg-danger" >
+<div class="w-100" [ngClass]="{ 'unclickable-element': showErrorModal } ">
+    <div class="d-flex justify-content-center align-items-center w-100">
+            <div class="card rounded border-2 border-danger w-25">
+                <div class="card-body bg-danger " >
                     <form [formGroup]="loginForm" method="POST">
                         <div class="form-group">
                             <label for="username" class="font_regular text-white">Username:</label>
@@ -64,7 +63,7 @@
                     Don't have an account? <a routerLink="sign-up" class=" font_regular text-danger">Sign Up</a>
                 </div>
             </div>
-        </div>
+     
     </div>
 </div>
 

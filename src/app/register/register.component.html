@@ -1,4 +1,4 @@
-<!-- <div class="bg-warning-subtle d-flex justify-content-center align-items-center" style="height: 78vh;
+<div class="gradient-bg d-flex justify-content-center align-items-center" style="height: 78vh;
  display: flex; justify-content: center;">
   <div *ngIf="showErrorModal == true" class="d-flex align-items-center text-danger font_regular modal-settings p-2" style=" font-size: 1.1rem; border: 2px solid red;">
     <div>
@@ -9,7 +9,7 @@
   </div>
 <div class="w-100"  [ngClass]="{ 'unclickable-element': showErrorModal } ">
     <div class="d-flex justify-content-center w-100">
-            <div class="card rounded border-2 border-danger w-50">
+            <div class="card rounded-3 border-2 border-danger w-25">
                 <div class="card-body bg-danger" >
                     <form [formGroup]="registerForm" method="POST">
                         <div class="form-group">
@@ -102,108 +102,6 @@
         
     </div>
 </div>
-</div> -->
-
-
-<div class="container-fluid bg-warning-subtle d-flex justify-content-center align-items-center" style="height: 78vh;">
-    <div *ngIf="showErrorModal == true" class="d-flex align-items-center text-danger font_regular modal-settings p-2" style="font-size: 1.1rem; border: 2px solid red;">
-        <div>
-            <div class="d-flex align-items-center text-center">
-                <p>{{errorMessage}}</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-8 col-lg-6" [ngClass]="{ 'unclickable-element': showErrorModal }">
-        <div class="d-flex justify-content-center w-100">
-            <div class="card rounded border-2 border-danger w-100">
-                <div class="card-body bg-danger">
-                    <form [formGroup]="registerForm" method="POST">
-                        <div class="form-group">
-                            <label for="username" class="font_regular text-white">Username:</label>
-                            <input  formControlName="username" type="text" id="username"  name="username" class="form-control rounded" placeholder="Enter your username" required>                           
-                        </div>
-                        
-                        <div  *ngIf="registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched" class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> This field is required</span>
-                        </div>
-                        <div  *ngIf="registerForm.get('username')?.hasError('minlength') && registerForm.get('username')?.touched" class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> Username must at least 3 characters long</span>
-                        </div>
-                        <div  *ngIf="registerForm.get('username')?.hasError('maxlength') && registerForm.get('username')?.touched" class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> Usernames length cannot exceed 50 characters</span>
-                        </div>
-
-                        <div *ngIf="showUsernameError">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> {{usernameError}} </span>
-                        </div>
-                       
-                        <div class="form-group">
-                            <label for="password" class="font_regular text-white">Password:</label>
-                            <input  formControlName="password" type="password" id="password" name="password"  class="form-control rounded" placeholder="Enter your password"  required>
-                        </div>
-
-                        <div *ngIf="showPasswordError">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> {{passwordError}} </span>
-                        </div>
-
-
-                        <div  *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched" class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> This field is required</span>
-                        </div>
-                        <div  *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched" class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> Password must at least 8 characters long</span>
-                        </div>
-                        <div  *ngIf="registerForm.get('password')?.hasError('maxlength') && registerForm.get('password')?.touched" class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> Passwords length cannot exceed 32 characters</span>
-                        </div>
-
-                        <div  *ngIf="registerForm.get('password')?.hasError('invalidPassword') && !registerForm.get('password')?.hasError('minlength') && !registerForm.get('password')?.hasError('maxlength') && registerForm.get('password')?.touched && !registerForm.get('password')?.hasError('required')"  class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character</span>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="confirmedPassword" class="font_regular text-white">Confirmed Password:</label>
-                            <input  formControlName="confirmedPassword" type="password" id="confirmedPassword" name="confirmedPassword" class="form-control rounded" placeholder="Confirm your password"  required>
-                        </div>
-
-                        <div *ngIf="showConfirmedPasswordError">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> {{confirmedPasswordError}} </span>
-                        </div>
-                        
-                        <div  *ngIf="registerForm.get('confirmedPassword')?.hasError('required') && registerForm.get('confirmedPassword')?.touched" class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> This field is required</span>
-                        </div>
-
-                        <div  *ngIf="registerForm.get('confirmedPassword')?.hasError('passwordMismatch')" class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> Passwords do not match</span>
-                        </div>
-                        
-
-                       
-                        <div class="form-group">
-                            <label for="email" class="font_regular text-white">Email:</label>
-                            <input formControlName="email" type="email" id="email" name="email" class="form-control rounded" placeholder="Email"  required>
-                        </div>
-
-                        <div *ngIf="showEmailError">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> {{emailError}} </span>
-                        </div>
-
-                        <div  *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched" class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> This field is required</span>
-                        </div>
-                
-                        <div  *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched || registerForm.get('email')?.hasError('minlength') || registerForm.get('email')?.hasError('maxlength')" class="text-center ">
-                            <span style="font-size: 1rem;" class="font_regular text-danger-emphasis"> <i class="fa-solid fa-triangle-exclamation"></i> Please provide valid email between 10 and 50 characters</span>
-                        </div>
-                        <button type="submit" (click)="onSubmit()" class="mt-3 btn btn-outline-dark font_regular text-white">Sign Up</button>
-                    </form>
-                </div>
-                <div class="card-footer text-center font_regular bg-danger-subtle text-danger">
-                    Already have an account? <a routerLink="sign-in" class="font_regular text-danger">Sign In</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
+
+
