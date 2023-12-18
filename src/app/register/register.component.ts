@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
 import { Gamemaster } from 'src/interfaces/gamemaster-interfaces/gamemaster';
 import { GamemasterService } from 'src/gamemaster.service';
 import { catchError } from 'rxjs';
+import { SharedDataService, sharedDataServiceToken } from '../shared.data.service';
 
 @Component({
   selector: 'app-register',
@@ -34,41 +35,15 @@ export class RegisterComponent {
     });
 
     constructor(private gamemasterService : GamemasterService, private router: Router){
-    
+      
     }
 
-
+    
     passwordValidator(control: AbstractControl): { [key: string]: boolean } | null {
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
       const valid = passwordRegex.test(control.value);
       return valid ? null : { 'invalidPassword': true };
     }
-  
-  //   confirmedPasswordValidator(control: AbstractControl): { [key: string]: boolean } | null {  
-  //     if (!this || !this.registerForm) {
-  //         // Handle the case where 'this' or 'registerForm' is undefined
-  //         return { 'passwordMismatch': false };
-  //     }
-  
-  //     const passwordControl = this.registerForm.get('password');
-      
-  //     if (!passwordControl) {
-  //         // Handle the case where 'passwordControl' is null
-  //         return { 'passwordMismatch': false };
-  //     }
-  
-  //     const password = passwordControl.value;
-  //     const confirmedPassword = control.value;
-  //     const valid = password === confirmedPassword;
-  
-  //     return valid ? null : { 'passwordMismatch': true };
-  // }
-  
-  
-  
-  
-  
-
 
   onSubmit() {   
       if(this.registerForm.valid){

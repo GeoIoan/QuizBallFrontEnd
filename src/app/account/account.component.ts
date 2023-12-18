@@ -5,7 +5,7 @@ import {FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/
 
 import { GamemasterService } from 'src/gamemaster.service';
 import { AuthService } from '../auth-service';
-import { GmUpdateDto } from '../gm-update-dto';
+import { GmUpdateDto } from '../../interfaces/gamemaster-interfaces/gm-update-dto';
 import { catchError } from 'rxjs';
 
 @Component({
@@ -29,22 +29,23 @@ export class AccountComponent {
 
 
   constructor(private authSer: AuthService,private gamemasterService : GamemasterService, private router: Router){
-  
   }
 
-  accountForm =  new FormGroup({
-    username: new FormControl (this.authSer.getGmName(), [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-    email: new FormControl (this.authSer.getGmEmail(), [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.email]),     
-  });
+  
+    accountForm =  new FormGroup({
+      username: new FormControl (this.authSer.getGmName(), [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
+      email: new FormControl (this.authSer.getGmEmail(), [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.email]),     
+    });
 
 
-  onSubmit(){
-    if(this.accountForm.valid){
+
+  update(){
+    if(this.accountForm!.valid){
       console.log("Form is valid")
      const dto: GmUpdateDto = {
       id: Number.parseInt(this.authSer.getGmId()!),
-      username: this.accountForm.value.username!,
-      email: this.accountForm.value.email!
+      username: this.accountForm!.value.username!,
+      email: this.accountForm!.value.email!
      }
 
      this.gamemasterService.update(dto, Number.parseInt(this.authSer.getGmId()!))
@@ -152,8 +153,8 @@ export class AccountComponent {
     this.gamemasterService.deleteGamemaster(Number.parseInt(this.authSer.getGmId()!))
     .pipe(
       catchError(error => {
-        if ((error.status == 500 && error.error === "Db failure")) {
-          this.errorMessage = "Could not perform update operation due to an internal error."
+        if ((error.status === 500 && error.error === "Db failure")) {
+          this.errorMessage = "Could not perform delete operation due to an internal error."
           this.showDeleteModal = false
           this.showErrorModal = true;
         
@@ -162,7 +163,9 @@ export class AccountComponent {
             this.showErrorModal = false;
           }, 5000); 
         } else {
-          this.errorMessage = "Could not perform update operation due to an unexpected error."
+          console.log(error)
+          console.log(error.error)
+          this.errorMessage = "Could not perform delete operation due to an unexpected error."
           this.showDeleteModal = false
           this.showErrorModal = true;
        
@@ -176,6 +179,10 @@ export class AccountComponent {
     )
     .subscribe(() =>{
       this.showDeleteModal = false
+      this.authSer.setAuthToken("")
+      this.authSer.setGmEmail("")
+      this.authSer.setGmName("")
+      this.authSer.setGmId(0)
       this.router.navigate(["/"])
     })
   }

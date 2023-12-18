@@ -94,6 +94,7 @@ export class ChooseTeamComponent {
 
   private create(): void{
     const participant : Participant = {
+      id: 0,
       name: this.teamsName,
       type: "Team",
       members: null,
@@ -160,9 +161,6 @@ export class ChooseTeamComponent {
         }, 3000);
       } else{
         if(this.gameData) {
-        this.gameData.game.participant1Id = Number.parseInt(this.team1);
-        this.gameData.game.participant2Id = Number.parseInt(this.team2); 
-        
 
         let wins1 : number = 0
         let wins2 : number = 0
@@ -173,10 +171,12 @@ export class ChooseTeamComponent {
           if(p.id == this.team1){
             wins1 = p.wins 
             team1Name = p.name
+            this.gameData!.participants.participant1 = p as Participant
           } 
           if(p.id == this.team2){
             wins2 = p.wins 
             team2Name = p.name
+            this.gameData!.participants.participant2 = p as Participant
           } 
         }
       )

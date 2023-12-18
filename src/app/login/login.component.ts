@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
 import { GamemasterService } from 'src/gamemaster.service';
 import { Login } from 'src/interfaces/gamemaster-interfaces/login';
 import { catchError } from 'rxjs';
 import { Auth } from '../auth';
 import { AuthService } from '../auth-service';
+import { SharedDataService, sharedDataServiceToken } from '../shared.data.service';
 
 @Component({
   selector: 'app-login',
@@ -24,14 +25,17 @@ export class LoginComponent {
     showErrorModal: boolean = false
 
 
+    constructor(private gamemasterService : GamemasterService, private router: Router, private authSer : AuthService){
+  
+    
+    }
+
   loginForm = new FormGroup({
     username: new FormControl ('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
     password: new FormControl ('',[Validators.required, Validators.minLength(8), Validators.maxLength(32), this.passwordValidator]),
   });
 
-  constructor(private gamemasterService : GamemasterService, private router: Router, private authSer : AuthService){
-    
-  }
+  
 
   passwordValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;

@@ -24,19 +24,19 @@
         <p class="text-danger font_regular mt-1" style="font-size: 2rem;">Choose your teams</p>
       </div>
       
-      <div class="d-flex flex-column align-items-center rounded-4 justify-content-center bg-danger-subtle h-50" style="border: 2px solid green; width: 30%;">
+      <div class="d-flex flex-column align-items-center rounded-4 justify-content-center bg-danger h-50" style="border: 4px solid rgb(226, 147, 160); width: 30%;">
         <div class="d-flex justify-content-center align-items-center">
           <div class="form-group mb-3" style="margin-right: 15px;">
-            <label for="player1ComboBox" class="form-label text-danger font_regular" style="font-size: 1.3rem;">Team 1</label>
-            <select class="form-control bg-warning-subtle border-2 border-danger rounded-4"  [(ngModel)]="team1" id="player1ComboBox">
+            <label for="player1ComboBox" class="form-label text-light font_regular" style="font-size: 1.3rem;">Team 1</label>
+            <select class="form-control bg-warning-subtle rounded-4"  [(ngModel)]="team1" id="player1ComboBox" style="border: 3px solid rgb(226, 147, 160);">
               <option value="">Choose Player</option>
               <option *ngFor="let participant of participants" [value]="participant.id">{{ participant.name }}</option>
             </select>
           </div>
 
           <div class="form-group mb-3">
-            <label for="player2ComboBox" class="form-label text-danger font_regular" style="font-size: 1.3rem;">Team 2</label>
-            <select class="form-control bg-warning-subtle border-2 border-danger rounded-4" [(ngModel)]="team2" id="player2ComboBox">
+            <label for="player2ComboBox" class="form-label text-light font_regular" style="font-size: 1.3rem;">Team 2</label>
+            <select class="form-control bg-warning-subtle rounded-4" [(ngModel)]="team2" id="player2ComboBox" style="border: 3px solid rgb(226, 147, 160);">
               <option value="">Choose Team</option>
               <option *ngFor="let participant of participants" [value]="participant.id">{{ participant.name }}</option>
             </select>
@@ -44,9 +44,9 @@
         </div>
 
         <div class="d-flex justify-content-center flex-column align-items-center">
-          <label for="player" class="form-label text-danger font_regular" style="font-size: 1.3rem;"><strong>Or Create a New Team</strong></label>
-          <input type="text"   class="form-control bg-warning-subtle border-2 border-danger" id="player" [(ngModel)]="teamsName" placeholder="Enter Teams name">
-          <button type="button" (click)="createTeam()" class="button btn btn-outline-danger rounded-4 mt-2">Create</button>
+          <label for="player" class="form-label text-light font_regular" style="font-size: 1.3rem;"><strong>Or Create a New Team</strong></label>
+          <input type="text"   class="form-control bg-warning-subtle rounded-4" id="player" [(ngModel)]="teamsName" placeholder="Enter Teams name" style="border: 3px solid rgb(226, 147, 160);">
+          <button type="button" (click)="createTeam()" class="button btn btn-outline-light rounded-4 mt-2">Create</button>
         </div>
 
         <div *ngIf="showNameError">

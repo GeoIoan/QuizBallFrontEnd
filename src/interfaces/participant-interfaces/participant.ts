@@ -1,4 +1,5 @@
 export interface Participant {
+    id: number
     name: string,
     type: string,
     members: number | null,

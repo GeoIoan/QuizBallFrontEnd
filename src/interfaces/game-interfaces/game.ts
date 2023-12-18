@@ -7,7 +7,5 @@ export interface Game {
     endDate: Date | null,
     duration: Date | null,
     gamemasterId: number | null,
-    custom: number | null,
-    participant1Id: number | null,
-    participant2Id: number | null
+    custom: number | null
 }

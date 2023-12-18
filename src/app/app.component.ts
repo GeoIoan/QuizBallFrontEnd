@@ -18,7 +18,4 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  name = "Giorgos"
-  surname = "Ioannou"
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
 import { GamemasterService } from 'src/gamemaster.service';
-import { CheckGmPassDto } from '../check-gm-pass-dto';
+import { CheckGmPassDto } from '../../interfaces/gamemaster-interfaces/check-gm-pass-dto';
 import { AuthService } from '../auth-service';
 import { catchError } from 'rxjs';
 

@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { Game } from 'src/interfaces/game-interfaces/game';
 import { GameByParticipants } from 'src/interfaces/game-interfaces/game-by-participants';
 import { GamesEnd } from 'src/interfaces/game-interfaces/games-end';
-import { AddQuestionsDto } from './app/add-questions-dto';
+import { AddQuestionsDto } from './interfaces/game-interfaces/add-questions-dto';
+import { AddParticipantsToGame } from './interfaces/game-interfaces/add.participants.to.game';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,10 @@ export class GameService{
 
     addQuestionsToGame(dto : AddQuestionsDto) : Observable<any>{
         return this.http.post('https://localhost:7053/api/games/AddQuestionsToGame', dto)
+    }
+
+    addParticipantsToGame(dto : AddParticipantsToGame) : Observable<any>{
+        return this.http.post('https://localhost:7053/api/games/AddParticipantsToGame', dto)
     }
 
     endGame(game: GamesEnd) : Observable<any>{

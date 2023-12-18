@@ -1,5 +1,6 @@
 import { Game } from "src/interfaces/game-interfaces/game"
 import { Categories } from "./categories"
+import { AddParticipantsToGame } from "../interfaces/game-interfaces/add.participants.to.game"
 
 export interface GameData {
     participant1X2: boolean
@@ -20,5 +21,6 @@ export interface GameData {
     fiftyFifty_P2: boolean,
     phone_P1: boolean,
     phone_P2: boolean,
-    questions: Array<any>
+    questions: Array<any>,
+    participants: AddParticipantsToGame
 }

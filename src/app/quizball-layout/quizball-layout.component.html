@@ -5,11 +5,15 @@
                 <div class="w-25">
                 </div>
 
-                <div class="w-50 d-flex text-center align-items-center h-100"> 
+                <div *ngIf="logoFunctional" class="w-50 d-flex text-center align-items-center h-100"> 
                     <a routerLink="menu"><img  src="./../../assets/QuizballLogoo.png" class="img-fluid w-50" alt="..."></a>
                 </div>
 
-                <div class="dropdown w-25 d-flex align-items-center justify-content-end mb-2" style="margin-right: 5px;">
+                <div *ngIf="logoFunctional == false" class="w-50 d-flex text-center align-items-center h-100"> 
+                    <img  src="./../../assets/QuizballLogoo.png" class="img-fluid w-50" alt="...">
+                </div>
+
+                <div *ngIf="showLogOut" class="dropdown w-25 d-flex align-items-center justify-content-end mb-2" style="margin-right: 5px;">
                     <button (click)="logout()" class="btn btn-danger rounded-4">Log Out</button>
                 </div>
             </header>

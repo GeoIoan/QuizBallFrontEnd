@@ -20,7 +20,8 @@ export class QuestionService{
         const params = new HttpParams()
           .set('gamemasterId', dto.gamemaster_id!.toString())
           .set('categoryId', dto.category_id.toString())
-          .set('difficultyId', dto.difficulty_id.toString());
+          .set('difficultyId', dto.difficulty_id.toString())
+          .set('lastQuestion', dto.lastQuestion.toString());
       
         return this.http.get('https://localhost:7053/api/questions', { params });
       }

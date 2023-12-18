@@ -1,6 +1,6 @@
 import { Routes} from "@angular/router";
 import { PlayerOrTeamComponent } from "./main-components/my-participants/player-or-team/player-or-team.component";
-import { GameScreenComponent } from "./main-components/game-screen/game-screen.component";
+import { GameScreenComponent } from "../game-screen/game-screen.component";
 import { MainMenuComponent } from "./main-menu/main-menu.component";
 import { QuickgameeMenuComponent } from "./main-components/quick-game/quickgamee-menu/quickgamee-menu.component";
 import { ChoosePlayerComponent } from "./player_components/choose-player/choose-player.component";

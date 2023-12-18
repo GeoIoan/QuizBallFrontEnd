@@ -6,7 +6,7 @@ import { ParticipantService } from 'src/app/participant.service';
 import { GameData } from 'src/app/game-data';
 import { catchError, max } from 'rxjs';
 import { GameService } from 'src/game.service';
-import { AddQuestionsDto } from 'src/app/add-questions-dto';
+import { AddQuestionsDto } from 'src/interfaces/game-interfaces/add-questions-dto';
 
 
 @Component({
@@ -98,7 +98,9 @@ export class GameScreenComponent {
           })  
         )
         .subscribe((g) => {                  
-              if (this.gameData){      
+              if (this.gameData){ 
+                this.gameData.participants.id = g.id
+                
                 this.gameService.addQuestionsToGame({
                 gameId: g.id,
                 questions: this.gameData.questions
@@ -116,18 +118,34 @@ export class GameScreenComponent {
                 })        
               )
               .subscribe(() =>{
-                switch(winner){
-                  case "No Winner": {
-                    this.winner = "Its a tie!";
-                    break;
+                this.gameService.addParticipantsToGame(this.gameData!.participants)
+                .pipe(
+                  catchError(error => {
+                    if(error.status === 500 && error.message === "Db failure"){
+                      this.errorMessage = "An internal error occured while wraping up the game."
+                      this.showError = true;
+                    } else{
+                      this.errorMessage = "An unexpected error occured while wraping up the game"
+                      this.showError = true;
+                    }
+                    return error
+                  })        
+                )
+                .subscribe(() =>{
+                  switch(winner){
+                    case "No Winner": {
+                      this.winner = "Its a tie!";
+                      break;
+                    }
+                    default:{
+                      this.winner= winner;
+                      break;
+                    }
                   }
-                  default:{
-                    this.winner= winner;
-                    break;
-                  }
-                }
-                
-                this.showModal = true;
+                  
+                  this.showModal = true;
+
+                })               
               })
             }         
           }          
@@ -162,109 +180,111 @@ export class GameScreenComponent {
 
   private findWinner() : string{
     let winner : string = ""
+    
+    if(this.isThereAPoint()) return winner
+    else{
+      const score = this.score1 - this.score2
 
-    const maxQuestion = this.findMaxQuestion()
-    if(this.score1 == this.score2 && maxQuestion > 0) return winner
-    else if(this.score1 == this.score2 && maxQuestion == 0) winner = "No winner"
-
-    if(maxQuestion == 0)
-      if(this.score1 > this.score2)
-        if(this.participant1) winner = this.participant1       
-      else if (this.score1 < this.score2)
-        if(this.participant2) winner = this.participant2
-    else {
-      let losingScore = 0
-      if(this.score1 > this.score2){
-        losingScore = this.score2 
-
-        if((losingScore + maxQuestion) < this.score1){
-          if(this.participant1)
-          winner = this.participant1
-        } else return winner
-      } else {
-        
-        losingScore = this.score1 
-        
-        if((losingScore + maxQuestion) < this.score2){
-          if(this.participant2)
-          winner = this.participant2
-        } else return winner
+      switch(score){
+        case 0: {
+          winner = "No Winner"
+          break;
+        }
+        default: {
+          if (score > 0) {
+            winner = this.participant1!
+          } else {
+            winner = this.participant2!
+          }
+          break; 
       }
+
     }
       
       return winner
     }
+  }
 
 
-    private findMaxQuestion() : number{
-      let x3 : boolean = true;
-      let x2 : boolean = true;
-      let x1: boolean = true
-  
-    for(let i = 1; i <= 9; i++){
-      if (this.gameData){
-        if(this.gameData.categories[i]){
-          if(this.gameData.categories[i][3] != undefined && this.gameData.categories[i][3] !=null)
-          if(!this.gameData.categories[i][3]){
-            x3 = this.gameData.categories[i][3]
-            break
-          }
-  
-          if(this.gameData.categories[i][3.1] != undefined && this.gameData.categories[i][3.1] !=null)
-          if(!this.gameData.categories[i][3.1]){
-            x3 = this.gameData.categories[i][3.1]
-            break;
-          }
-          
-       if(this.gameData.categories[i][3.2] != undefined && this.gameData.categories[i][3.2] !=null)
-          if(!this.gameData.categories[i][3.2]){
-            x3 = this.gameData.categories[i][3.2]
-            break
-          }
-                 
-          if(this.gameData.categories[i][2] != undefined && this.gameData.categories[i][2] != null)
-          if(!this.gameData.categories[i][2]){
-            x2 = this.gameData.categories[i][2]
-            break
-         }
+    private isThereAPoint() : boolean {
 
-          if(this.gameData.categories[i][2.1] != undefined && this.gameData.categories[i][2.1] !=null)
-          if(!this.gameData.categories[i][2.1]){
-            x2 = this.gameData.categories[i][2.1] 
-            break
-          }
-  
-          if(this.gameData.categories[i][2.2] != undefined && this.gameData.categories[i][2.2] !=null)
-          if(!this.gameData.categories[i][2.2]){
-            x2 = this.gameData.categories[i][2.2]
-            break
-          }
+      let questionX3: number = 4
+      let questionX1: number = 4
+      let questionsX2: number = 10 
+      let questionsLeft : number = 18;
+      let pointsTakenOrLost : number = 0;
+      const totalPoints : number = 36
+      const distance : number = Math.abs(this.score1 - this.score2) 
+      
+      this.gameData!.questions.forEach(q => {
+        questionsLeft--
+        pointsTakenOrLost += q.difficultyId
 
-          if(this.gameData.categories[i][1] != undefined && this.gameData.categories[i][1] != null)
-          if(!this.gameData.categories[i][1]){
-            x1 = this.gameData.categories[i][1]
+        switch(q.difficultyId){
+          case 3: {
+            questionX3--
             break
           }
-          
-          if(this.gameData.categories[i][1.1] != undefined && this.gameData.categories[i][1.1] !=null)
-          if(!this.gameData.categories[i][1.1]){
-            x1 = this.gameData.categories[i][1.1]
+          case 2:{
+            questionsX2--
             break
           }
-          
-          if(this.gameData.categories[i][1.2] != undefined && this.gameData.categories[i][1.2] !=null)
-          if(!this.gameData.categories[i][1.2]){
-            x1 = this.gameData.categories[i][1.2]
+          case 1:{
+            questionX1--
             break
           }
+        }
+      })
+
+      const pointsLeft : number = totalPoints - pointsTakenOrLost
+    
+      if (questionsLeft === 0) return false
+      if(distance === 0) return true      
+      if (pointsLeft > distance && questionsLeft >= 2) return true
+
+      const whoWins : number = (this.score1 > this.score2) ? 1 : 2
+           
+      let maxQuestionLeft: number = (questionX3 > 0) ? 3 : 2
+      
+      if(questionsX2 === 0 && questionX3 === 0) maxQuestionLeft = 1
+
+       switch(whoWins){
+        case 1:{
+          switch(this.gameData!.whoPlays){
+            case 1:{
+              if(pointsLeft > distance) return false             
+              break
+            }
+            case 2:{
+              if(pointsLeft > distance) return true
+              break
+            }            
+          }
+          if(distance >= pointsLeft){
+            if(!this.gameData!.participant2X2 && distance <= pointsLeft + maxQuestionLeft) return true
+            return false
+          }
+          break;
+        }
+        case 2: {
+          switch(this.gameData!.whoPlays){
+            case 1:{
+              if(pointsLeft > distance) return true
+              break
+            }
+            case 2:{
+              if(pointsLeft > distance) return false
+              break;
+            }            
+          }
+          if(distance >= pointsLeft){
+            if(!this.gameData!.participant1X2 && distance <= pointsLeft + maxQuestionLeft) return true
+            return false
+          }
+          break;
+        }
       }
-     }
-    }
-  
-    if(!x3) return 3
-    if(!x2) return 2
-    if(!x1) return 1
-    return 0
+      return false
   }
 
 

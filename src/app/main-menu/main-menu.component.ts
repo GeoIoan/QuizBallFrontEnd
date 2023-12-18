@@ -26,9 +26,7 @@ export class MainMenuComponent {
       endDate: null,
       duration: null,
       gamemasterId: Number.parseInt(this.authSer.getGmId()!),
-      custom: 0,
-      participant1Id: null,
-      participant2Id: null
+      custom: 0
     };
 
     const categories : Categories = {
@@ -47,28 +45,24 @@ export class MainMenuComponent {
         3.2: false
       },
       4: {
-        3.1: false,
-        3.2: false
+        2.1: false,
+        2.2: false
       },
       5:{
         2.1: false,
         2.2: false
       },
       6:{
-        1.1: false,
-        1.2: false
+        2.1: false,
+        2.2: false
       },
       7:{
-        1: false,
-        2: false
-      },
-      8:{
-        1: false,
-        2: false
-      },
-      9:{
         1.1: false,
         1.2: false
+      },
+      8:{
+        2.1: false,
+        2.2: false
       }
     }
 
@@ -91,7 +85,12 @@ export class MainMenuComponent {
       fiftyFifty_P2: false,
       phone_P1: false,
       phone_P2: false,
-      questions: new Array<any>
+      questions: new Array<any>,
+      participants: {
+        id: null,
+        participant1: null,
+        participant2: null
+      },
     }
 
     console.log('New game data:', gameData);

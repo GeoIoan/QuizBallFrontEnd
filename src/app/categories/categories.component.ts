@@ -51,7 +51,7 @@ export class CategoriesComponent {
       else this.ifCustomGame = true;
       
     
-      setTimeout(() =>{ for(let i = 1; i <= 9; i++){
+      setTimeout(() =>{ for(let i = 1; i <= 8; i++){
         if(this.gameData)
         for(const dif in this.gameData.categories[i]){
             if(this.gameData.categories[i][dif] == true){
@@ -86,20 +86,36 @@ export class CategoriesComponent {
     this.x2 = true
     
     if(this.whoPlays == 1) 
-      this.participant1X2 = true    
+      this.participant1X2 = true          
     else 
       this.participant2X2 = true   
   }
 
   getQuestion(cat: number, dif: number): void {
+      let lastQuestion : number = 0;
+
       if(this.gameData){
         if(this.gameData.categories[cat][dif] == true) return
-        this.gameData.categories[cat][dif] = true;         
+        this.gameData.categories[cat][dif] = true;    
+        
+        console.log("Cat: ",cat)
+        console.log("Dif: ", dif)
+
+        console.log("Questions so far")
+
+        this.gameData.questions.forEach(q => {         
+          console.log(q)
+          if(q.categoryId == cat && q.difficultyId == Math.floor(dif)) lastQuestion = q.id
+        })
       }
+
+      console.log("LastQuestion: ", lastQuestion)
+
       const dto: SelectQuestion = {
         gamemaster_id: 1,
         category_id: cat,
-        difficulty_id: Math.floor(dif)
+        difficulty_id: Math.floor(dif),
+        lastQuestion: lastQuestion
       }
 
       this.questionService.getRandomQuestion(dto)
@@ -128,7 +144,7 @@ export class CategoriesComponent {
         }) 
       )
       .subscribe(q => {
-        console.log(q)
+        console.log("Question id: ", q.id)
 
         if(this.gameData) {
 
