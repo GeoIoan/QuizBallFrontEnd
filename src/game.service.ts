@@ -6,23 +6,27 @@ import { GameByParticipants } from 'src/interfaces/game-interfaces/game-by-parti
 import { GamesEnd } from 'src/interfaces/game-interfaces/games-end';
 import { AddQuestionsDto } from './interfaces/game-interfaces/add-questions-dto';
 import { AddParticipantsToGame } from './interfaces/game-interfaces/add.participants.to.game';
+import { AuthService } from './app/auth-service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class GameService{
-    constructor(private http: HttpClient = inject(HttpClient)) { }
+    constructor(private http: HttpClient = inject(HttpClient), private auth: AuthService) { }
 
     createGame(game: Game): Observable<any> {
-        return this.http.post('https://localhost:7053/api/games/CreateGame', game);
+        const headers = new HttpHeaders().set('Authorization', this.auth.getAuthToken()!);
+        return this.http.post('https://localhost:7053/api/games/CreateGame', game, { headers });
       }
 
     addQuestionsToGame(dto : AddQuestionsDto) : Observable<any>{
-        return this.http.post('https://localhost:7053/api/games/AddQuestionsToGame', dto)
+        const headers = new HttpHeaders().set('Authorization', this.auth.getAuthToken()!);
+        return this.http.post('https://localhost:7053/api/games/AddQuestionsToGame', dto , { headers })
     }
 
     addParticipantsToGame(dto : AddParticipantsToGame) : Observable<any>{
-        return this.http.post('https://localhost:7053/api/games/AddParticipantsToGame', dto)
+        const headers = new HttpHeaders().set('Authorization', this.auth.getAuthToken()!);
+        return this.http.post('https://localhost:7053/api/games/AddParticipantsToGame', dto , { headers })
     }
 
     endGame(game: GamesEnd) : Observable<any>{
@@ -30,7 +34,8 @@ export class GameService{
     }
 
     getGameByParticipants(dto: GameByParticipants) : Observable<any>{
+        const headers = new HttpHeaders().set('Authorization', this.auth.getAuthToken()!);
         const params = new HttpParams({ fromObject: dto as any });
-        return this.http.get('https://localhost:7053/api/games', { params })
+        return this.http.get('https://localhost:7053/api/games', { params, headers } )
     }
 }

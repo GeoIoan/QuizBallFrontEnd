@@ -1,13 +1,9 @@
 import { Routes} from "@angular/router";
-import { PlayerOrTeamComponent } from "./main-components/my-participants/player-or-team/player-or-team.component";
 import { GameScreenComponent } from "../game-screen/game-screen.component";
 import { MainMenuComponent } from "./main-menu/main-menu.component";
-import { QuickgameeMenuComponent } from "./main-components/quick-game/quickgamee-menu/quickgamee-menu.component";
 import { ChoosePlayerComponent } from "./player_components/choose-player/choose-player.component";
 import { ChooseTeamComponent } from "./team-components/choose-team/choose-team.component";
-import { PlayersTeamsComponent } from "./main-components/my-participants/players-teams/players-teams.component";
 import { CategoriesComponent } from "./categories/categories.component";
-import { QuestionComponent } from "./question/question.component";
 import { AccountComponent } from "./account/account.component";
 import { ConfirmPasswordComponent } from "./confirm-password/confirm-password.component";
 import { ChangePasswordComponent } from "./change-password/change-password.component";
@@ -17,6 +13,10 @@ import { CustomGameComponent } from "./custom-game/custom-game.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { AuthGuard } from './auth.guard';
+import { QuickgameeMenuComponent } from "./quick-game/quickgamee-menu/quickgamee-menu.component";
+import { PlayerOrTeamComponent } from "./my-participants/player-or-team/player-or-team.component";
+import { PlayersTeamsComponent } from "./my-participants/players-teams/players-teams.component";
+import { QuestionComponent } from "./question/question.component";
 
 
 

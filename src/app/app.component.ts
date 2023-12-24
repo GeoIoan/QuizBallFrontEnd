@@ -6,7 +6,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 
 
 import { QuizballLayoutComponent } from './quizball-layout/quizball-layout.component';
-import { PlayerOrTeamComponent } from './main-components/my-participants/player-or-team/player-or-team.component';
+// import { PlayerOrTeamComponent } from './main-components/my-participants/player-or-team/player-or-team.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 

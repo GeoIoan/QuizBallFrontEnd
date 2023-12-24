@@ -7,7 +7,7 @@ import { Login } from 'src/interfaces/gamemaster-interfaces/login';
 import { catchError } from 'rxjs';
 import { Auth } from '../auth';
 import { AuthService } from '../auth-service';
-import { SharedDataService, sharedDataServiceToken } from '../shared.data.service';
+// import { SharedDataService, sharedDataServiceToken } from '../shared.data.service';
 
 @Component({
   selector: 'app-login',

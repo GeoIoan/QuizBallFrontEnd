@@ -5,7 +5,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModu
 import { Gamemaster } from 'src/interfaces/gamemaster-interfaces/gamemaster';
 import { GamemasterService } from 'src/gamemaster.service';
 import { catchError } from 'rxjs';
-import { SharedDataService, sharedDataServiceToken } from '../shared.data.service';
+// import { SharedDataService, sharedDataServiceToken } from '../shared.data.service';
 
 @Component({
   selector: 'app-register',
