@@ -17,11 +17,6 @@
     src: url('assets/fonts/Play-Bold.ttf');
 }
 
-.font-mario{
-    font-family: 'Mario';
-    src: url('assets/fonts/SuperMario286-18qg.ttf')
-}
-
 .shadow-text {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
