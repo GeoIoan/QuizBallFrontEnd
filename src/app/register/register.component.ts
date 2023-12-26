@@ -1,11 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
+import {Router, RouterModule} from '@angular/router';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
 import { Gamemaster } from 'src/interfaces/gamemaster-interfaces/gamemaster';
 import { GamemasterService } from 'src/gamemaster.service';
 import { catchError } from 'rxjs';
-// import { SharedDataService, sharedDataServiceToken } from '../shared.data.service';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +13,11 @@ import { catchError } from 'rxjs';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
+/**
+ * This class contains all the logic of the 
+ * Register compononent.
+ */
 export class RegisterComponent {
     usernameError : string = ""
     showUsernameError : boolean = false;
@@ -26,7 +30,6 @@ export class RegisterComponent {
     errorMessage: string = "";
     showErrorModal: boolean = false
     
-
     registerForm = new FormGroup({
       username: new FormControl ('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
       password: new FormControl ('',[Validators.required, Validators.minLength(8), Validators.maxLength(32), this.passwordValidator]),
@@ -34,17 +37,30 @@ export class RegisterComponent {
       email: new FormControl ('', [Validators.required, Validators.minLength(10), Validators.maxLength(100), Validators.email]),     
     });
 
-    constructor(private gamemasterService : GamemasterService, private router: Router){
-      
+    constructor(private gamemasterService : GamemasterService, private router: Router){  
     }
 
-    
+    /**
+     * Checks if the provided password of
+     * the gamemaster meets the nessecary
+     * criteria.
+     * @param control (AbstractControl) the provided password 
+     * @returns ([key: string]: boolean | null) 'invalidPassword': true if the password is ok
+     *           else null
+     */
     passwordValidator(control: AbstractControl): { [key: string]: boolean } | null {
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
       const valid = passwordRegex.test(control.value);
       return valid ? null : { 'invalidPassword': true };
     }
 
+    /**
+     * This method is called when the user
+     * presses the register button. If the 
+     * data are valid the new gamemaster is 
+     * saved in the database and the registration
+     * process is completed.
+     */
   onSubmit() {   
       if(this.registerForm.valid){
       const registerDTO : Gamemaster = this.registerForm.value as Gamemaster  

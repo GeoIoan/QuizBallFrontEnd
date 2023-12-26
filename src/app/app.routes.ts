@@ -18,7 +18,10 @@ import { PlayerOrTeamComponent } from "./my-participants/player-or-team/player-o
 import { PlayersTeamsComponent } from "./my-participants/players-teams/players-teams.component";
 import { QuestionComponent } from "./question/question.component";
 
-
+/**
+ * Is used to define the routes inside our app
+ * so that our router can navigate through it.
+ */
 
 export const routes: Routes = [    
 

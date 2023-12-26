@@ -9,6 +9,11 @@ import { RouterModule } from '@angular/router';
   templateUrl: './custom-game.component.html',
   styleUrls: ['./custom-game.component.css']
 })
+/**
+ * This component is still under
+ * development. It is part of the 
+ * Custom Game feature.
+ */
 export class CustomGameComponent {
 
 }

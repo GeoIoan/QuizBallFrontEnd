@@ -15,6 +15,13 @@ import { ChangeGmPassDto } from '../../interfaces/gamemaster-interfaces/change-g
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.css']
 })
+
+/**
+ * This class contains all the logic
+ * of the ConfirmPasswordComponent which
+ * is used whenever gamemasters wants to 
+ * change their password.
+ */
 export class ChangePasswordComponent {
   passwordError: string = ""
   showPasswordError: boolean = false;
@@ -35,12 +42,29 @@ constructor(private gamemasterService : GamemasterService, private router: Route
 
 }
 
+ /**
+     * Checks if the provided password of
+     * the gamemaster meets the nessecary
+     * criteria.
+     * @param control (AbstractControl) the provided password 
+     * @returns ([key: string]: boolean | null) 'invalidPassword': true if the password is ok
+     *           else null
+     */
+
 passwordValidator(control: AbstractControl): { [key: string]: boolean } | null {
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
   const valid = passwordRegex.test(control.value);
   return valid ? null : { 'invalidPassword': true };
 }
 
+
+ /**
+     * This method is called when the user
+     * presses the submit button. If the 
+     * data are valid the process 
+     * is completed and the gamemasters
+     * password is changed.
+     */
 onSubmit(){
   if(this.passwordForm.valid){
 

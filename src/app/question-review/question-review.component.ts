@@ -9,6 +9,12 @@ import { RouterModule } from '@angular/router';
   templateUrl: './question-review.component.html',
   styleUrls: ['./question-review.component.css']
 })
+
+/**
+ * This component is still under
+ * development. It is part of the 
+ * Custom Game feature.
+ */
 export class QuestionReviewComponent {
 
 }

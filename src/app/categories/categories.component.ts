@@ -16,6 +16,15 @@ import { GameData } from '../game-data';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
+
+/**
+ * This class contains all the logic 
+ * of the Categories Component which is used
+ * whenever a participant must choose a question.
+ * To handle that case a card containing all 
+ * the available questions is shown and the participants
+ * can choose which question they want to answer.
+ */
 export class CategoriesComponent {
   gameData: GameData | null | undefined;
   participant1: string | null | undefined
@@ -42,6 +51,10 @@ export class CategoriesComponent {
     }); 
   }
 
+  /**
+   * During initialization the available questions
+   * are found and displayed accordingly.
+   */
   ngOnInit(): void {   
     if(this.gameData){
       if (this.gameData.game.custom == 0) 
@@ -78,7 +91,12 @@ export class CategoriesComponent {
   }
 
 
-
+  /**
+   * This method handles the case where 
+   * the participant chooses the x2 points 
+   * option.
+   * @returns 
+   */
   X2(){   
    if (this.participant1X2 && this.whoPlays == 1) return
    else if (this.participant2X2 && this.whoPlays == 2) return
@@ -91,6 +109,14 @@ export class CategoriesComponent {
       this.participant2X2 = true   
   }
 
+  /**
+   * This method fethes a random question
+   * of specific category and difficulty level 
+   * from the back-end server 
+   * @param cat (number) the categories id
+   * @param dif (number) the difficulty id
+   * @returns 
+   */
   getQuestion(cat: number, dif: number): void {
       let lastQuestion : number = 0;
 

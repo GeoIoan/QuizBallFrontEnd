@@ -13,10 +13,23 @@ import { AuthService } from '../auth-service';
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.css']
 })
+
+/**
+ * This class contains all the logic of the
+ * MainMenuComponent which represents the 
+ * main menu of our app. It is repsonsible 
+ * for routing the gamemaster to the desired
+ * component.
+ */
 export class MainMenuComponent {
 
   constructor(private router: Router, private authSer: AuthService) {}
 
+  /**
+   * This method is called whenever the
+   * gamemaster presses the quick game 
+   * button. 
+   */
   createGame(): void {
     const newGame: Game = {
       type: null,

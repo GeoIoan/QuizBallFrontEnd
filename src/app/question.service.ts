@@ -9,6 +9,13 @@ import { AuthService } from './auth-service';
 @Injectable({
     providedIn: 'root'
 })
+
+/**
+ * Instances of this class can be used
+ * to make requests concerning the question
+ * entity to the back-end server.
+ */
+
 export class QuestionService{
     constructor(private http: HttpClient = inject(HttpClient), private auth: AuthService) {    
     }
@@ -17,6 +24,13 @@ export class QuestionService{
         return this.http.post("https://localhost:7053/api/questions", question)
     }
     
+    /**
+     * This method is used to send requests in order
+     * to get back random question of a specific
+     * category and diffculty level.
+     * @param dto (SelectQuestion) contains all the data needed for this operation
+     * @returns (Observable<any>) the response to the request
+     */
     getRandomQuestion(dto : SelectQuestion): Observable<any> {
         const headers = new HttpHeaders().set('Authorization', this.auth.getAuthToken()!);
         const params = new HttpParams()

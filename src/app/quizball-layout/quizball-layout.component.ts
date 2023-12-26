@@ -14,6 +14,13 @@ import { filter } from 'rxjs';
   templateUrl: './quizball-layout.component.html',
   styleUrls: ['./quizball-layout.component.css']
 })
+
+/**
+ * This class contains the logic
+ * of the QuizballLayoutComponent. This
+ * component represents the basic layout
+ * of our app.
+ */
 export class QuizballLayoutComponent {
   showLogOut:boolean = true
   logoFunctional: boolean = true
@@ -23,6 +30,12 @@ export class QuizballLayoutComponent {
   constructor(private authSer: AuthService, private router: Router, private route: ActivatedRoute){    
   }
  
+  /**
+   * This method is called when the user
+   * presses the log out button. The method
+   * handles all the logout logic by removing
+   * all the data of the gamemaster.
+   */
   logout(){
     this.authSer.removeGmEmail()
     this.authSer.removeGmId()

@@ -16,6 +16,14 @@ import { AddQuestionsDto } from 'src/interfaces/game-interfaces/add-questions-dt
   templateUrl: './game-screen.component.html',
   styleUrls: ['./game-screen.component.css']
 })
+
+/**
+ * This class contains the logic of
+ * the GameScreenComponent which is 
+ * used when the game starts and through
+ * out the course of the game as it displays
+ * the score of the game. 
+ */
 export class GameScreenComponent {
   gameData: GameData | null | undefined;
   wins1: number | null | undefined
@@ -42,6 +50,16 @@ export class GameScreenComponent {
     console.log(this.gameData)  
   }
 
+  /**
+   * At initialization the new score is calculated
+   * based on the game data, if there is a point
+   * in continuing the game(if the a chance for the
+   * losing participant to get a tie or win the game)
+   * the game continues else the winning participant is
+   * announced the games finishes and is send to the
+   * back-end server in order to be saved in the database.
+   * @returns 
+   */
   ngOnInit(): void { 
     if(this.gameData){
       if(this.gameData.game.score){
@@ -154,6 +172,11 @@ export class GameScreenComponent {
     }    
   }
 
+    /**
+     * This method is called when the gamemaster 
+     * presses the play button so a participant
+     * can choose a question and try to answer it.
+     */
     play(){
       if(this.gameData) {
         if (this.gameData.round == 1) {
@@ -178,6 +201,12 @@ export class GameScreenComponent {
     } 
   } 
 
+  /**
+   * This method is used everytime to check 
+   * if we have a winner or not.
+   * @returns (string) empty if there is no winner yer, "No winner" if its a tie, and the
+   *          winning participants name if we have a winner.
+   */
   private findWinner() : string{
     let winner : string = ""
     
@@ -205,7 +234,13 @@ export class GameScreenComponent {
     }
   }
 
-
+    /**
+   * This method is used everytime to check 
+   * if there is a point in playing or not.
+   * (Have not figured out how to make it work
+   * perfectly yet but i will soon)
+   * @returns (boolean) true if there is a point, false if not
+   */
     private isThereAPoint() : boolean {
 
       let questionX3: number = 4

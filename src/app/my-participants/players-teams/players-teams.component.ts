@@ -15,6 +15,15 @@ import { AuthService } from 'src/app/auth-service';
   templateUrl: './players-teams.component.html',
   styleUrls: ['./players-teams.component.css']
 })
+
+/**
+ * This class contains all the logic of the
+ * PlayersTeamsComponent which is used when 
+ * gamemasters have choosen which of their
+ * participants they want to view. All the participants
+ * are shown in cards which contain buttons
+ * that provide update and delete functionality. 
+ */
 export class PlayersTeamsComponent {
   participantsType : string = ""
   participants: any[] = [];
@@ -31,7 +40,10 @@ export class PlayersTeamsComponent {
     this.populateWithParticiapants()
   }
 
-
+  /**
+   * Fethes the participants of the chosen type
+   * and creates a card for each one.
+   */
   populateWithParticiapants(){
     this.participantService.getParticipantByType(Number.parseInt(this.authSer.getGmId()!), this.participantsType)
     .pipe (
@@ -48,6 +60,12 @@ export class PlayersTeamsComponent {
     })    
   }
 
+  /**
+   * Is called whenever a gamemaster wants
+   * to change the name of a participant
+   * @param participantName (string) the new name
+   * @param participantsId (number) the id of the participant
+   */
   changeName(participantName : string, participantsId : number){
     const input = document.getElementById(participantName) as HTMLInputElement;
 
@@ -102,11 +120,23 @@ export class PlayersTeamsComponent {
 
   }
 
+  /**
+   * Is called whenever the gamemaster
+   * wants to delete a participant. This method
+   * shows a modal that asks the gamemster if
+   * they want to continue with this operation.
+   * @param participantsId (number) the id of the participant
+   */
   deleteParticipant(participantsId : number){
     this.participantsId = participantsId;
     this.showDeleteModal = true;     
   }
 
+  /**
+   * This method is called if the gamemaster
+   * wants to proceed with the deletion of 
+   * a participant.
+   */
   confrimDelete(){
     this.participantService.deleteParticipant(this.participantsId)
     .pipe (
@@ -136,6 +166,11 @@ export class PlayersTeamsComponent {
     this.showDeleteModal = false;
   }
 
+  /**
+   * This method is called if the gamemaster
+   * does not want to proceed with the deletion
+   * of participant.
+   */
   rejectDelete(){
     this.showDeleteModal = false;
   }

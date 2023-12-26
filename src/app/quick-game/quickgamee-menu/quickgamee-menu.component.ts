@@ -12,6 +12,14 @@ import { GameData } from 'src/app/game-data';
   templateUrl: './quickgamee-menu.component.html',
   styleUrls: ['./quickgamee-menu.component.css']
 })
+
+/**
+ * This class contains all the logic
+ * of the QuickgameMenuComponent. This component
+ * respresnts the menu that the users see
+ * when they press the quick game button in
+ * the main menu.
+ */
 export class QuickgameeMenuComponent {
   gameData: GameData | null | undefined
 
@@ -22,6 +30,12 @@ export class QuickgameeMenuComponent {
     });
   }
 
+  /**
+   * This method is called if the user
+   * chooses to play a pvp (Player versus Player)
+   * game and redirects the user to the respectable
+   * component.
+   */
   navigateToPvP(): void {
     if (this.gameData) {
       this.gameData.game.type = "pvp"
@@ -29,6 +43,12 @@ export class QuickgameeMenuComponent {
     }
   }
 
+  /**
+   * This method is called if the user
+   * chooses to play a tvt (Team versus Team)
+   * game and redirects the user to the respectable
+   * component.
+   */
   navigateToTvT(): void {
     if (this.gameData) {
       this.gameData.game.type = "tvt"

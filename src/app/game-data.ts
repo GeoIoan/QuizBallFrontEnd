@@ -2,6 +2,12 @@ import { Game } from "src/interfaces/game-interfaces/game"
 import { Categories } from "./categories"
 import { AddParticipantsToGame } from "../interfaces/game-interfaces/add.participants.to.game"
 
+/**
+ * Objects that have use this interface
+ * transfer data that is needed during the
+ * games duration.
+ */
+
 export interface GameData {
     participant1X2: boolean
     participant2X2: boolean 

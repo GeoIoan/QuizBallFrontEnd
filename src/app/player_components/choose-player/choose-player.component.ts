@@ -16,6 +16,13 @@ import { AuthService } from 'src/app/auth-service';
   templateUrl: './choose-player.component.html',
   styleUrls: ['./choose-player.component.css']
 })
+
+/**
+ * This class contains the logic of the
+ * ChoosePlayerComponent which is used
+ * whenever a gamemaster chooses to start
+ * a tvt(Team versus Team) game. 
+ */
 export class ChoosePlayerComponent {
     gameData: GameData | null | undefined;
     participants: any[] = [];
@@ -40,6 +47,12 @@ export class ChoosePlayerComponent {
     ngOnInit(): void {
     }
   
+    /**
+     * This method get the existing teams
+     * of a specific gamemaster form the
+     * back-end server and then populates
+     * the comboboxes with these data.
+     */
     private fetchParticipants(): void {
       this.participantService.getParticipantByType(Number.parseInt(this.authSer.getGmId()!), 'player')
         .pipe(
@@ -90,6 +103,10 @@ export class ChoosePlayerComponent {
       }
     }
 
+    /**
+     * This method is called whenever the
+     * gamemaster wants to create a new team.
+     */
     private create(): void{
       const participant : Participant = {
         id: 0,
@@ -146,7 +163,10 @@ export class ChoosePlayerComponent {
       })    
     }
 
-   
+   /**
+    * This method is called whenever the gamemaster
+    * is ready and wants to continue to the game screen.
+    */
     goToGameScreen(){
       this.successContainerIsVisible = false;
      
@@ -180,8 +200,6 @@ export class ChoosePlayerComponent {
         })
 
         
-
-
         this.gameData.wins1 = wins1
         this.gameData.wins2 = wins2
         this.gameData.participant1 = player1Name

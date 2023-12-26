@@ -16,6 +16,14 @@ import { catchError } from 'rxjs';
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
+
+/**
+ * This class contains all the logic 
+ * of the AccountComponent which is 
+ * used whenever gamemasters want to
+ * view their account details, upate them
+ * or completely delete their account.
+ */
 export class AccountComponent {
   usernameError : string = ""
     showUsernameError : boolean = false;
@@ -38,7 +46,11 @@ export class AccountComponent {
     });
 
 
-
+  /**
+   * This method is used whenever
+   * gamemaster want to update their
+   * account.
+   */
   update(){
     if(this.accountForm!.valid){
       console.log("Form is valid")
@@ -148,7 +160,12 @@ export class AccountComponent {
   }
 
 
-
+  /**
+   * This method is called when the gamemaster
+   * wants to proceed with the delete operation.
+   * If the deletion is completed the user is routed
+   * to the login component.
+   */
   continue(){
     this.gamemasterService.deleteGamemaster(Number.parseInt(this.authSer.getGmId()!))
     .pipe(
@@ -187,10 +204,22 @@ export class AccountComponent {
     })
   }
 
+  /**
+   * This method is called when
+   * gamemasters to do want to
+   * proceed with the delete operation.
+   */
   stop(){
     this.showDeleteModal = false
   }
 
+  /**
+   * This method is called whenever 
+   * gamemasters want to delete their account
+   * completely. It shows a modal asking the 
+   * gamemasters if they want to procceed with 
+   * the operation.
+   */
   deleteGm(){
     this.showDeleteModal = true
   }

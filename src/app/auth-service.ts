@@ -6,6 +6,10 @@ import { Observable } from "rxjs";
     providedIn: 'root'
 })
 
+/**
+ * Contains all the logic needed after authenticating a
+ * gamemaster.
+ */
 export class AuthService{
     constructor(private http: HttpClient = inject(HttpClient)) { }
 
@@ -14,6 +18,13 @@ export class AuthService{
     private gmName: string = "gmName"
     private gmEmail: string = "gmEmail"
 
+    /**
+     * This method is used to send a request
+     * to check if the gamemaster
+     * is authenticated, so that we can authorize entry
+     * to the static pages of our app.
+     * @returns (Observable<any>) the response to the request.
+     */
     auth(): Observable<any> {
         console.log("Token: ", this.token)
 

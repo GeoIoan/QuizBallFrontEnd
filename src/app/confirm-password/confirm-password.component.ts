@@ -15,6 +15,12 @@ import { catchError } from 'rxjs';
   templateUrl: './confirm-password.component.html',
   styleUrls: ['./confirm-password.component.css']
 })
+/**
+ * This class contains all the logic
+ * of the ConfirmPasswordComponent which
+ * is used whenever gamemasters wants to 
+ * change their password.
+ */
 export class ConfirmPasswordComponent {
     passwordError: string = ""
     showPasswordError: boolean = false;
@@ -33,12 +39,28 @@ export class ConfirmPasswordComponent {
   
   }
 
+  /**
+     * Checks if the provided password of
+     * the gamemaster meets the nessecary
+     * criteria.
+     * @param control (AbstractControl) the provided password 
+     * @returns ([key: string]: boolean | null) 'invalidPassword': true if the password is ok
+     *           else null
+     */
   passwordValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
     const valid = passwordRegex.test(control.value);
     return valid ? null : { 'invalidPassword': true };
   }
 
+  /**
+     * This method is called when the user
+     * presses the submit button. If the 
+     * data are valid and credentials ok
+     * the process is completed and the gamemaster
+     * is given routed to the component that handles
+     * the change-password logic.
+     */
   onSubmit(){
     if(this.passwordForm.valid){
 

@@ -5,11 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { Game } from 'src/interfaces/game-interfaces/game';
 import { GameData } from '../game-data';
 import { Question } from 'src/interfaces/question-interfaces/question';
-// import { GameScreenComponent } from '../main-components/game-screen/game-screen.component';
-// import { ThreePointsModalComponent } from '../three-points-modal/three-points-modal.component';
 import { FormsModule } from '@angular/forms';
-
-
 
 @Component({
   selector: 'app-question',
@@ -18,6 +14,11 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
+
+/**This class contains all the logic of
+ * the QuestionComponent which is called
+ * when we want to display a question.
+ */
 export class QuestionComponent {
   gameData: GameData | null | undefined;
   question1: string = "";
@@ -139,6 +140,12 @@ export class QuestionComponent {
       }
    }
 
+   /**
+    * This method is called if the participants
+    * answer to the question is right. The method
+    * forwards the data needed so that the new score 
+    * can be calculated in the game-screen component.
+    */
   isRight(){
     if (this.gameData){
       this.gameData.rightOrWrong = true
@@ -156,6 +163,12 @@ export class QuestionComponent {
     }
   } 
 
+    /**
+    * This method is called if the participants
+    * answer to the question is wrong. The method
+    * forwards the data needed so that the new score 
+    * can be calculated in the game-screen component.
+    */
     isWrong(){
       if (this.gameData && this.question){
         this.gameData.rightOrWrong = false
@@ -170,13 +183,34 @@ export class QuestionComponent {
         }
       } 
 
+      /**
+       * This method is called whenever
+       * the gamemaster wants to remember
+       * the answer to the question that 
+       * was asked.
+       */
       showAnswer(){
         this.answer = true
       }
+
+      /**
+       * This method is called to
+       * hide the answer.
+       */
       hideAnswer(){
         this.answer = false
       }
 
+      /**
+       * This method is only used when 
+       * the questions categoryId = 3 which
+       * means that the questions belongs
+       * to the top5 category. In these type of
+       * questions the participant must find provide
+       * 5 answers after, the user gets 6 tries totally.
+       * After each try the ready button is clicked and this
+       * method is called.
+       */
       ready(){
         this.counter++;
         let rightAnswers = 0;
@@ -232,7 +266,19 @@ export class QuestionComponent {
       }
 
       
-
+      /**
+       * This method is only used when 
+       * the questions categoryId = 3 which
+       * means that the questions belongs
+       * to the top5 category. In these type of
+       * questions the participant must find provide
+       * 5 answers after, the participant gets 6 tries totally.
+       * When the participant gets 3 right answers they
+       * are given the option to stop and get 1 point.
+       * When this happens, a modal is shown asking
+       * players what they want to do. If they choose
+       * to stop this method is called.
+       */
       stop(){
         if(this.gameData){
           this.gameData.pointx1 = true;
@@ -251,11 +297,30 @@ export class QuestionComponent {
         this.showModal = false;
       }
 
+
+       /**
+       * This method is only used when 
+       * the questions categoryId = 3 which
+       * means that the questions belongs
+       * to the top5 category. In these type of
+       * questions the participant must find provide
+       * 5 answers after, the participant gets 6 tries totally.
+       * When the participant gets 3 right answers they
+       * are given the option to stop and get 1 point.
+       * When this happens, a modal is shown asking
+       * players what they want to do. If they choose
+       * to continue this method is called.
+       */
       continue(){
         this.showModal = false;   
         this.safety = true;   
       }
 
+      /**
+       * This method is called when the 
+       * participant chooses to use
+       * phone help to answer the question.
+       */
       phoneHelp(){
         this.phone = true;
 
@@ -266,6 +331,15 @@ export class QuestionComponent {
         }
       }
     
+        /**
+       * This method is called when the 
+       * participant chooses to use
+       * 50-50 help to answer the question.
+       * The participant is given two possible 
+       * answers to question asked with one of them
+       * beaing the right one. If the participants
+       * choose right they get one point.
+       */
       fiftyFiftyEv(){
         this.fiftyFifty = true;
         this.fiftyFifty2 = true;

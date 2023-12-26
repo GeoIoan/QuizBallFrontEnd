@@ -16,6 +16,11 @@ import { AuthService } from 'src/app/auth-service';
   templateUrl: './choose-team.component.html',
   styleUrls: ['./choose-team.component.css']
 })
+
+/**
+ * This class contains logic concerning the choosing of the two teams 
+ * and creation of new ones.
+ */
 export class ChooseTeamComponent {
   gameData: GameData | null | undefined;
   participants: any[] = [];
@@ -39,6 +44,11 @@ export class ChooseTeamComponent {
   ngOnInit(): void {
   }
 
+  /**
+   * This method is used to fetch the teams from
+   * the back-end server and populate the components
+   * compoboxes with them.
+   */
   private fetchParticipants(): void {
     const gmId = Number.parseInt(this.authSer.getGmId()!)
 
@@ -76,6 +86,11 @@ export class ChooseTeamComponent {
     })
     }   
 
+    /**
+     * This method is used in order to check
+     * if the users input are correct when 
+     * they want to create a new team.
+     */
     createTeam(){
       this.errorContainerIsVisible = false;
       this.successContainerIsVisible = false;
@@ -92,6 +107,10 @@ export class ChooseTeamComponent {
     }
   }
 
+  /**
+   * This method is used to create a new team
+   * based on the users inputs
+   */
   private create(): void{
     const participant : Participant = {
       id: 0,
@@ -147,7 +166,11 @@ export class ChooseTeamComponent {
     })    
   }
 
- 
+  /**
+   * This method is used when the user
+   * is ready and wants to continue to the
+   * next stage.
+   */
   goToGameScreen(){
     this.successContainerIsVisible = false;
    

@@ -9,6 +9,11 @@ import { RouterModule } from '@angular/router';
   templateUrl: './create-question.component.html',
   styleUrls: ['./create-question.component.css']
 })
+/**
+ * This component is still under
+ * development. It is part of the 
+ * Custom Game feature.
+ */
 export class CreateQuestionComponent {
 
 }
