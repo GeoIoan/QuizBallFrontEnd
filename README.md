@@ -1,27 +1,17 @@
-# AngularIntroduction
+# Quizball
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+Welcome to Quizball, a web application designed to offer an engaging quiz game with questions focused on football knowledge. This application represents a significant milestone for me, as it's the result of my unique idea(the idea of making it an app is mine, the game already exists in analog form), and I've developed it entirely from scratch. Your support and appreciation mean a lot to me, and I sincerely hope you find it enjoyable and engaging.
 
-## Development server
+## Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Quizball allows two players or two teams to compete in a football-themed quiz game. The game is skillfully managed and presented by a Gamemaster who is responsible for creating teams and players. The core entities - teams, players, and the game itself - are stored in the database and are closely associated with the Gamemaster, ensuring a seamless gaming experience.
 
-## Code scaffolding
+## Gameplay
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Players can choose pre-existing teams and players or create new ones for each game. Past game history is available for previously used teams or players.
+- A random selection determines which team or player starts the game.
+- Questions are divided into eight categories, each with a specific number of questions and different difficulty levels.
+- The selection of questions and their points is based on category and difficulty.
+- Custom games can be created by the Gamemaster by inputting 18 custom questions.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Thank you for exploring Quizball!
