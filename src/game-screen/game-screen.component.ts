@@ -271,9 +271,7 @@ export class GameScreenComponent {
         }
       })
 
-      // const pointsLeft : number = totalPoints - pointsTakenOrLost
-
-      const pointsLeft : number = totalPoints - (this.score1 + this.score2)
+      const pointsLeft : number = totalPoints - pointsTakenOrLost
 
       if (questionsLeft === 0) return false
       if(distance === 0) return true      
